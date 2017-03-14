@@ -13,6 +13,10 @@ get_header();
             <div class="container">
                 <div class="row">
                     <div class="three-quarters-block">
+                        <?php
+                        //sidebar.php подключил к index.php
+                        get_sidebar();
+                        ?>
                         <?php if ( have_posts() ) : ?>
                             <?php /* начинается цикл */ ?>
                             <?php while ( have_posts() ) : the_post(); ?>
@@ -26,20 +30,6 @@ get_header();
                             <?php get_template_part( 'template-parts/content', 'none' ); ?>
                         <?php endif; ?>
                     </div>
-
-                    <!-- sidebar -->
-                    <!--
-
-                     get_sidebar()
-                     Подключает файл шаблона sidebar.php (сайдбар). Если передан параметр $name, то будет подключен файл sidebar-{name}.php.
-                     Если файл не найден в шаблоне темы, то будет взять файл по умолчанию: wp-includes/theme-compat/sidebar.php
-                     https://wp-kama.ru/function/get_sidebar
-                     -->
-                    <?php
-                    //sidebar.php подключил к index.php
-                    get_sidebar();
-                    ?>
-                    <!-- end sidebar -->
 
                 </div> <!-- .row -->
             </div> <!-- .container -->

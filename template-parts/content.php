@@ -1,5 +1,5 @@
 <!doctype html>
-<!-- Website Template by freewebsitetemplates.com -->
+
 <html>
 <head>
     <meta charset="UTF-8">
@@ -26,6 +26,7 @@
                 $myposts = $my_posts->query(array(
                     'post_type' => 'post'
                 ));
+                var_dump($myposts);
                 foreach ($myposts as $post) {
                     echo $post->post_title . '<br/>';
                     echo '<p>'. $post->post_content . '<p/>';

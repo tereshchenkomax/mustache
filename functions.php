@@ -140,33 +140,143 @@ function renderThemeMenu(){
     _e('Sub Mustache theme', MUSTACHE_THEME_TEXTDOMAIN);
 }
 
-//function register_my_widgets(){
-//    register_sidebar( array(
-//        'name' => "Правая боковая панель сайта",
-//        'id' => 'right-sidebar',
-//        'description' => 'Эти виджеты будут показаны с правой колонке сайта',
-//        'before_title' => '<h1>',
-//        'after_title' => '</h1>'
-//    ) );
-//}
-//add_action( 'widgets_init', 'register_my_widgets' );
-//
-//function true_remove_default_widget() {
-//    unregister_widget('WP_Widget_Archives'); // Архивы
-//    unregister_widget('WP_Widget_Calendar'); // Календарь
-//    /*unregister_widget('WP_Widget_Categories'); // Рубрики
-//    unregister_widget('WP_Widget_Meta'); // Мета
-//    unregister_widget('WP_Widget_Pages'); // Страницы
-//    unregister_widget('WP_Widget_Recent_Comments'); // Свежие комментарии
-//    unregister_widget('WP_Widget_Recent_Posts'); // Свежие записи
-//    unregister_widget('WP_Widget_RSS'); // RSS
-//    unregister_widget('WP_Widget_Search'); // Поиск
-//    unregister_widget('WP_Widget_Tag_Cloud'); // Облако меток
-//    unregister_widget('WP_Widget_Text'); // Текст
-//    unregister_widget('WP_Nav_Menu_Widget'); // Произвольное меню*/
-//}
-//
-//add_action( 'widgets_init', 'true_remove_default_widget', 20 );
-//
-//require get_template_directory().'/widgets/StepByStepExampleWidget.php';
-//add_action('widgets_init', create_function('', 'return register_widget("widgets\StepByStepExampleWidget");'));
+function register_my_widgets(){
+    register_sidebar( array(
+        'name' => "Правая боковая панель сайта",
+        'id' => 'left-sidebar',
+        'description' => 'Эти виджеты будут показаны с левой колонке сайта',
+        'before_title' => '<h1>',
+        'after_title' => '</h1>'
+    ) );
+}
+add_action( 'widgets_init', 'register_my_widgets' );
+
+function true_remove_default_widget() {
+    unregister_widget('WP_Widget_Archives'); // Архивы
+    unregister_widget('WP_Widget_Calendar'); // Календарь
+    /*unregister_widget('WP_Widget_Categories'); // Рубрики
+    unregister_widget('WP_Widget_Meta'); // Мета
+    unregister_widget('WP_Widget_Pages'); // Страницы
+    unregister_widget('WP_Widget_Recent_Comments'); // Свежие комментарии
+    unregister_widget('WP_Widget_Recent_Posts'); // Свежие записи
+    unregister_widget('WP_Widget_RSS'); // RSS
+    unregister_widget('WP_Widget_Search'); // Поиск
+    unregister_widget('WP_Widget_Tag_Cloud'); // Облако меток
+    unregister_widget('WP_Widget_Text'); // Текст
+    unregister_widget('WP_Nav_Menu_Widget'); // Произвольное меню*/
+}
+
+add_action( 'widgets_init', 'true_remove_default_widget', 20 );
+
+require get_template_directory().'/widgets/MustacheWidget.php';
+add_action('widgets_init', create_function('', 'return register_widget("widgets\MustacheWidget");'));
+
+add_action('customize_register','my_customize_register');
+function my_customize_register( $wp_customize ) {
+    // Section
+    $wp_customize->add_section('mustache_section', array(
+        'title' => __('My section title', MUSTACHE_THEME_TEXTDOMAIN),
+        'priority' => 30,
+        'description' => __('My section description', MUSTACHE_THEME_TEXTDOMAIN),
+    ));
+
+    // Setting
+    $wp_customize->add_setting("mustache_my_settings", array(
+        "default" => "Mustache text test test",
+        "transport" => "postMessage",
+    ));
+
+    // Control
+    $wp_customize->add_control(new WP_Customize_Control(
+        $wp_customize,
+        "mustache_my_settings",
+        array(
+            "label" => __("Title", MUSTACHE_THEME_TEXTDOMAIN),
+            "section" => "mustache_section",
+            "settings" => "mustache_my_settings",
+            "type" => "textarea",
+        )
+    ));
+
+    // Setting
+    $wp_customize->add_setting("mustache_my_test_settings", array(
+        "default" => "",
+        "transport" => "postMessage",
+    ));
+
+    // Control
+    $wp_customize->add_control( 'step_by_step_my_test_settings', array(
+        'label'       => __("Label", MUSTACHE_THEME_TEXTDOMAIN),
+        'section'     => 'mustache_section',
+        'type'        => 'input',
+        'description' =>  __("Description", MUSTACHE_THEME_TEXTDOMAIN)
+    ) );
+
+    // Setting
+    $wp_customize->add_setting("mustache_my_img_settings", array(
+        "default" => "",
+        "transport" => "postMessage",
+    ));
+
+    // Control
+    $wp_customize->add_control(
+        new WP_Customize_Image_Control(
+            $wp_customize,
+            'mustache_my_img_settings',
+            array(
+                'label'      => __( 'Upload a logo', MUSTACHE_THEME_TEXTDOMAIN),
+                'section'    => 'mustache_section',
+                'settings'   => 'mustache_my_settings',
+                //'context'    => 'your_setting_context'
+            )
+        )
+    );
+
+
+    // Setting
+    $wp_customize->add_setting("mustache_my_upload_settings", array(
+        "default" => "",
+        "transport" => "postMessage",
+    ));
+
+    // Control
+    $wp_customize->add_control(
+        new WP_Customize_Upload_Control(
+            $wp_customize,
+            'mustache_my_upload_settings',
+            array(
+                'label'      => __( 'Upload', MUSTACHE_THEME_TEXTDOMAIN),
+                'section'    => 'mustache_section',
+                'settings'   => 'mustache_my_upload_settings'
+            )
+        )
+    );
+
+    // Setting
+    $wp_customize->add_setting("mustache_my_color_settings", array(
+        "default" => "",
+        "transport" => "postMessage",
+    ));
+
+    // Control
+    $wp_customize->add_control(
+        new WP_Customize_Color_Control(
+            $wp_customize,
+            'mustache_my_color_settings',
+            array(
+                'label'      => __( 'Color', MUSTACHE_THEME_TEXTDOMAIN),
+                'section'    => 'mustache_section',
+                'settings'   => 'mustache_my_color_settings'
+            )
+        )
+    );
+}
+
+add_action( 'customize_preview_init', 'my_customizer_script' );
+function my_customizer_script() {
+    wp_enqueue_script(
+        'my-customizer-script',
+        get_template_directory_uri().'/js/my-customizer-script.js', //$src,
+        array( 'jquery', 'customize-preview' )
+    );
+}
