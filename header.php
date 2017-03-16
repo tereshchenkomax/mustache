@@ -89,5 +89,20 @@
     <div id="page-title">
 
     </div> <!-- #page-title -->
+    <div id="page-title">
+        <div class="container" id="customiser">
+            <div class="row">
+
+                <h1 class="entry-title" itemprop="headline" id="mustache_my_settings">
+                    <?php
+                    echo get_theme_mod("mustache_my_settings");
+                    ?>
+
+                </h1>
+                <p class="description" itemprop="description">tortor felis quam rutrum velit, pretium posuere placerat. Vitae ut nulla eget</p>
+
+            </div> <!-- .row -->
+        </div> <!-- .container -->
+    </div> <!-- #page-title -->
 
 </div> <!-- #masthead -->

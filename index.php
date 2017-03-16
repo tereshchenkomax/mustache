@@ -9,14 +9,15 @@
 get_header();
 ?>
     <main id="content" role="main">
+
+        <?php
+        //sidebar.php подключил к index.php
+        get_sidebar();
+        ?>
         <div class="section">
             <div class="container">
                 <div class="row">
                     <div class="three-quarters-block">
-                        <?php
-                        //sidebar.php подключил к index.php
-                        get_sidebar();
-                        ?>
                         <?php if ( have_posts() ) : ?>
                             <?php /* начинается цикл */ ?>
                             <?php while ( have_posts() ) : the_post(); ?>

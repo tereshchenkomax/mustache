@@ -3,6 +3,7 @@
         <?php
         if ( function_exists('dynamic_sidebar') ){
             dynamic_sidebar('left-sidebar');
+            dynamic_sidebar('right-sidebar');
         }
         ?>
     </div> <!-- .sidebar -->

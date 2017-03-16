@@ -142,11 +142,18 @@ function renderThemeMenu(){
 
 function register_my_widgets(){
     register_sidebar( array(
-        'name' => "Правая боковая панель сайта",
+        'name' => "Левая боковая панель сайта",
         'id' => 'left-sidebar',
         'description' => 'Эти виджеты будут показаны с левой колонке сайта',
         'before_title' => '<h1>',
         'after_title' => '</h1>'
+    ) );
+    register_sidebar( array(
+        'name' => "Правая боковая панель сайта",
+        'id' => 'right-sidebar',
+        'description' => 'Эти виджеты будут показаны с правой колонке сайта',
+        'before_title' => '<h3>',
+        'after_title' => '</h3>'
     ) );
 }
 add_action( 'widgets_init', 'register_my_widgets' );

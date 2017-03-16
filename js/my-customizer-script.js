@@ -1,9 +1,9 @@
 
 (function($){
-    wp.customize("mustache_settings", function(value) {
+    wp.customize("mustache_my_settings", function(value) {
         console.log(value)
         value.bind(function(newval) {
-            $("#mustache_settings").html(newval);
+            $("#mustache_my_settings").html(newval);
         } );
     });
 })(jQuery);
